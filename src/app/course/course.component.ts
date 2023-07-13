@@ -102,6 +102,8 @@ export class CourseComponent implements OnInit, AfterViewInit {
                 private coursesService: CoursesService) {
 
     }
+    
+    displayedColumns = ["seqNo", "description", "duration"];
 
     ngOnInit() {
 
