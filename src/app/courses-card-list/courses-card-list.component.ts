@@ -14,6 +14,12 @@ export class CoursesCardListComponent implements OnInit {
     @Input()
     courses: Course[];
 
+    cols = 1;
+
+    rowHeight = '500px';
+
+    handsetPortrait = false;
+
     constructor(private dialog: MatDialog) {
     }
 
