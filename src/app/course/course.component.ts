@@ -8,7 +8,7 @@ import {CoursesService} from "../services/courses.service";
 import {debounceTime, distinctUntilChanged, startWith, tap, delay, catchError, finalize} from 'rxjs/operators';
 import {merge, fromEvent, throwError} from "rxjs";
 import { Lesson } from '../model/lesson';
-
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
     selector: 'course',
@@ -29,11 +29,13 @@ export class CourseComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort)
     sort: MatSort;
 
+    selection = new SelectionModel<Lesson>(true, []);
+
     constructor(private route: ActivatedRoute,
                 private coursesService: CoursesService) {
     }
     
-    displayedColumns = ["seqNo", "description", "duration"];
+    displayedColumns = ["select","seqNo", "description", "duration"];
 
     expandedLesson: Lesson = null;
 
@@ -43,6 +45,10 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
         this.loadLessonsPage();
 
+    }
+
+    onLessonToggle(lesson:Lesson){
+      this.selection.toggle(lesson);
     }
 
     loadLessonsPage(){
@@ -83,6 +89,19 @@ export class CourseComponent implements OnInit, AfterViewInit {
         tap(()=>this.loadLessonsPage())
       )
       .subscribe()
+    }
+
+    isAllSelected(){
+      return this.selection.selected?.length === this.lessons?.length
+    }
+
+    toggleAll(){
+      if(this.isAllSelected()){
+        this.selection.clear();
+      }
+      else{
+        this.selection.select(...this.lessons);
+      }
     }
 
 }
