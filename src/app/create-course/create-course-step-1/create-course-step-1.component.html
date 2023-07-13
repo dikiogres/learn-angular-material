@@ -16,6 +16,27 @@
         <mat-radio-button value="free">Free</mat-radio-button>
         <mat-radio-button value="premium">Premium</mat-radio-button>
     </mat-radio-group>
+    <mat-form-field appearance="fill">
+        <mat-label>Course Category</mat-label>
+        <mat-select formControlName="category" placeholder="Select Category">
+        <!-- <mat-select formControlName="category" placeholder="Select Category" multiple> -->
+            <!-- <mat-option>None</mat-option> -->
+            <mat-optgroup label="Beginners">
+                <mat-option value="newprogramming">New To Programming</mat-option>
+                <mat-option value="newjavascript">New To Javascript</mat-option>
+                <mat-option value="nwangular">New To Angular</mat-option>
+            </mat-optgroup>
+            <!-- <mat-option value="beginners">
+                Beginners
+            </mat-option> -->
+            <mat-option value="INTERMEDIATE">
+                Intermediate
+            </mat-option>
+            <mat-option value="ADVANCED">
+                Advanced
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 
 
