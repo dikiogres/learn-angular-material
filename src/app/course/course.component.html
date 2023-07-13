@@ -11,6 +11,7 @@
     matSort matSortDisableClear
     matSortActive="seqNo" matSortDirection="asc"
     [dataSource]="lessons"
+    multiTemplateDataRows
    >
     
       <ng-container matColumnDef="seqNo">
@@ -36,10 +37,21 @@
         <td mat-cell *matCellDef="let lesson"> {{lesson.duration}} </td>
     
       </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let lesson" colspan="3"> {{lesson.longDescription}} </td>
+      </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     
-      <tr mat-row *matRowDef="let lessons; columns: displayedColumns;"></tr>
+      <tr 
+        (click)="onToggleLesson(lessons)"
+        mat-row *matRowDef="let lessons; columns: displayedColumns;"></tr>
+
+      <tr 
+        [class.collapsed-details]="lessons != expandedLesson"
+        mat-row *matRowDef="let lessons; columns: ['expandedDetail'];"></tr>
+
   </table>
 
   <mat-paginator class="mat-elevation-z8"
